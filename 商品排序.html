@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        #btn {
+            width: 500px;
+            margin: 20px auto;
+        }
+
+        #btn span {
+            display: inline-block;
+            height: 30px;
+            padding: 6px 20px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 12px;
+            background-color: #f60;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #wrap {
+            width: 500px;
+            height: 600px;
+            margin: 50px auto;
+        }
+
+        #wrap li {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-bottom: 1px solid gray;
+            box-sizing: border-box;
+        }
+
+        #wrap li a {
+            display: block;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        #wrap li a>img {
+            width: 78px;
+            height: 78px;
+            border: 1px solid;
+            border-radius: 50%;
+        }
+
+        #wrap li a,
+        #wrap li .con {
+            float: left;
+        }
+
+        #wrap li .con {
+            width: 378px;
+            text-indent: 15px;
+            padding-top: 10px;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        #wrap li .con p {
+            line-height: 30px;
+        }
+
+        #wrap li .con p+p {
+            border-top: 1px dashed pink;
+        }
+
+        #wrap li .con p span {
+            font-size: 24px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul>
+
+        </ul>
+    </div>
+    <div id="btn">
+        <span class="random">随机排序</span>
+        <span class="up">从低到高</span>
+        <span class="down">从高到低</span>
+    </div>
+
+
+    <script>
+        //模拟数据
+         var data = [{
+                src: './images/01.jpg',
+                tit: '蛋糕',
+                price: 100
+            },
+            {
+                src: './images/02.jpg',
+                tit: '小娃娃',
+                price: 204
+            },
+            {
+                src: './images/03.jpg',
+                tit: '西瓜',
+                price: 11
+            },
+            {
+                src: './images/04.jpg',
+                tit: '520',
+                price: 1009
+            },
+            {
+                src: './images/05.jpg',
+                tit: '长脖子',
+                price: 120
+            },
+            {
+                src: './images/06.jpg',
+                tit: '星星',
+                price: 520
+            }
+        ]
+
+        //获取
+        let random = document.querySelector("#btn .random");
+        let up = document.querySelector("#btn .up");
+        let down = document.querySelector("#btn .down");
+        let ul = document.querySelector("#wrap ul");
+        let Lis = document.querySelectorAll("#wrap ul li");
+        let price = document.getElementsByClassName("price");
+
+        //添加模拟数据到ul
+        function add(){
+            let html = '';
+            data.forEach(function (ele) {
+                html += `
+                    <li>
+                        <a href=""><img src="${ele.src}" alt=""></a>
+                        <div class="con">
+                            <p class="title">${ele.tit}</p>
+                            <p class="price"><span>${ele.price}</span>元</p>
+                        </div>
+                    </li>
+                `;
+            });
+            ul.innerHTML = html;
+        };
+        add();
+
+
+        //随机排序
+        random.onclick = function(){
+            data.sort(function(){
+                return Math.random()-0.5;
+            });
+            add();
+        };
+
+        //从低到高
+        up.onclick = function(){
+            data.sort(function(a,b){
+                return a.price - b.price;
+            })
+            add();
+        };
+
+
+        //从高到低
+        down.onclick = function(){
+            data.sort(function(a,b){
+                return b.price - a.price;
+            })
+
+            add();
+        };
+    </script>
+</body>
+</html>

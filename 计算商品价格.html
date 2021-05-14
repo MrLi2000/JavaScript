@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            width: 500px;
+            height: 90px;
+            text-align: center;
+            margin: 50px auto;
+        }
+        table tbody td .down,table tbody td .up{
+            width: 30px;
+            height: 30px;
+            background-color: gray;
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            color: #fff;
+            margin-left: 10px 0 0 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>商品</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>总价格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td>好吃的</td>
+            <td class="price">50</td>
+            <td>
+                <span class="down">-</span>
+                <span class="number">0</span>
+                <span class="up">+</span>
+            </td>
+            <td class="totalPrice">0</td>
+        </tbody>
+    </table>
+
+    <script>
+        let price = document.querySelector(".price");
+        let sub = document.querySelector(".down");
+        let num = document.querySelector(".number");
+        let add = document.querySelector(".up");
+        let totalPrice = document.querySelector(".totalPrice");
+
+
+        add.onclick = function(){
+            let numVal = num.innerHTML;
+            numVal ++;
+            num.innerHTML = numVal;
+
+            totalPrice.innerHTML = numVal*price.innerHTML;
+        };
+
+        sub.onclick = function(){
+            // alert(11);
+            let numVal = num.innerHTML; 
+            numVal --;
+            if(numVal<=0){
+                numVal = 0;
+            }
+            num.innerHTML = numVal;
+            totalPrice.innerHTML = numVal*price.innerHTML;
+        }
+    </script>
+</body>
+</html>

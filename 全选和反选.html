@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", serif;
+        }
+
+        body,
+        dl,
+        dd,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+        }
+
+        ol,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        img {
+            border: none;
+        }
+
+        #wrap {
+            width: 300px;
+            padding-top: 20px;
+            margin: 50px auto;
+            border: 1px solid #bbb;
+            border-radius: 15px;
+            user-select: none;
+        }
+
+        #wrap ul.list li {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            font-size: 14px;
+            background: url("images/ckbg1.jpg") no-repeat 20px center;
+            text-indent: 70px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        #wrap ul.list li:nth-child(odd) {
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        #wrap ul.list li:nth-child(even) {
+            background-color: rgba(0, 0, 0, .6);
+        }
+
+        #wrap ul.list li.click {
+            background-image: url("images/ckbg2.jpg");
+            text-indent: 50px;
+        }
+
+        #wrap .btn {
+            overflow: hidden;
+            width: 100%;
+            height: 50px;
+        }
+
+        #wrap .btn p {
+            float: left;
+            line-height: 50px;
+            margin-left: 50px;
+            background: url("images/ckbg1.jpg") no-repeat 0 center;
+            text-indent: 23px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #wrap .btn p.click {
+            background-image: url("images/ckbg2.jpg");
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul class="list">
+            <li class="">李波</li>
+            <li class="">乖乖</li>
+            <li class="">花猫</li>
+            <li class="">陈予洁</li>
+            <li class="">迎头</li>
+            <li class="">咖啡</li>
+            <li class="">张强</li>
+            <li class="">花开富贵</li>
+        </ul>
+        <div class="btn">
+            <p class="all">全选</p>
+            <p class="fan" style="background-image: none">反选</p>
+        </div>
+    </div>
+
+    <script>
+        let Lis = document.querySelectorAll("#wrap ul li");
+        let All = document.querySelector(".btn .all");
+        let Fan = document.querySelector(".btn .fan");
+
+        let len = Lis.length;
+        //li点击选中
+        for(let i = 0 ; i < len ; i ++){
+            Lis[i].onclick = function(){
+                this.classList.toggle("click");
+
+                //判断每个li是否都添加click类名，都含有click类名则全选按钮选中
+                for (let j = 0; j < len; j++) {
+                    if (!Lis[j].classList.contains("click")) {
+                        All.classList.remove("click");
+                        return;
+                    }
+                    All.classList.add("click");
+                }
+
+            };
+        };
+
+        //点击全选
+        All.onclick = function(){
+            this.classList.toggle("click");
+
+            //判断
+            if (this.classList.contains("click")) {
+                for (let i = 0; i < len; i++) {
+                    Lis[i].classList.add("click");
+                }
+            } else {
+                for (let i = 0; i < len; i++) {
+                    Lis[i].classList.remove("click");
+                }
+            }
+        };
+
+        //点击反选
+        Fan.onclick = function(){
+            // 假设全部选中
+            var all = true;
+            for (let i = 0; i < len; i++) {
+                Lis[i].classList.toggle("click");
+                if (!Lis[i].classList.contains("click")) {
+                    All.classList.remove("click");
+                    all = false;
+                }
+            }
+            all && All.classList.add("click");
+        };
+    </script>
+</body>
+</html>

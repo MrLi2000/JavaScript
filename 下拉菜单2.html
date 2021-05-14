@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        #box {
+            width: 200px;
+            border: 1px dotted pink;
+            margin: 100px auto;
+
+
+        }
+
+        #box div p {
+            width: 100%;
+            height: 40px;
+            background-color: pink;
+            color: #a7a;
+            line-height: 40px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #fff;
+            font-weight: bold;
+        }
+
+        #box div.active p {
+            background-color: #0f0;
+        }
+
+        #box div ul li {
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            color: #fff;
+            text-indent: 20px;
+            background-color:tomato;
+            font-size: 12px;
+            margin-bottom: 1px;
+        }
+
+        #box div ul {
+            display: none;
+        }
+
+        #box div.active ul {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div>
+            <p>西游记</p>
+            <ul>
+                <li>孙悟空</li>
+                <li>猪八戒</li>
+                <li>沙悟净</li>
+            </ul>
+        </div>
+        <div>
+            <p>海贼王</p>
+            <ul>
+                <li>路飞</li>
+                <li>索隆</li>
+                <li>山治</li>
+            </ul>
+        </div>
+        <div>
+            <p>斗罗大陆</p>
+            <ul>
+                <li>唐山</li>
+                <li>马红俊</li>
+                <li>宁荣荣</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var l_Box = document.getElementById("box");
+        var l_p = l_Box.getElementsByTagName("p");
+        var l_div = l_Box.getElementsByTagName("div");
+
+        var len = l_p.length;
+
+        for (let i = 0; i < len; i++) {
+            l_p[i].onclick = function () {
+                l_div[i].classList.toggle("active");
+            }
+        }
+    </script>
+</body>
+</html>

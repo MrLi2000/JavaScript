@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        p{
+            color: red;
+            font-size: 50px;
+        }
+        ul.add li.addSon{
+            list-style: none;
+            height: 20px;
+            width: 50px;
+            color: #fff;
+            font-size: 20px;
+            padding: 8px;
+            float: left;
+            margin-left: 8px;
+            text-align: center;
+            line-height: 20px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <p>点击生成四位随机验证码</p>
+    
+    <ul class="add">
+
+    </ul>
+    <script>
+        let str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        let newStr = ''; //存放四位字符串
+
+        let text = document.querySelector(".add");
+        document.onclick = function(){
+            // alert(1);
+            for( let i = 0 ; i < 4 ; i ++){
+                newStr += str[parseInt( Math.random()*str.length)];
+            };
+            // document.write( newStr);
+            // text.innerHTML = newStr;
+            text.innerHTML += `<li class = "addSon">${newStr}</li>`;
+            newStr = '';
+        };
+    </script>
+</body>
+</html>

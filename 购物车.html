@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd{
+            margin:0;
+            padding:0;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        table{
+            width: 1000px;
+            border-collapse: collapse;
+            border-color: #930;
+            margin: 50px auto 0;
+            user-select: none;
+        }
+        table tr td{
+            width: 250px;
+            height: 100px;
+            text-align: center;
+        }
+        table tr.title td{
+            height: 50px;
+            background: #f9a;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        table tr td img{
+            display: block;
+            width: auto;
+            height: 70px;
+            margin: 0 auto;
+        }
+        table tr td.number span{
+            display: inline-block;
+            font-size: 12px;
+            text-align: center;
+        }
+        table tr td.number span.down,table tr td.number span.add{
+            width: 30px;
+            height: 30px;
+            background: #ddd;
+            line-height: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        table tr td.number span.num{
+            width: 50px;
+            height: 28px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            line-height: 28px;
+            color: #f9a;
+        }
+        .box{
+            width: 1000px;
+            height: 50px;
+            background: #f9a;
+            margin: 10px auto;
+        }
+        .box p{
+            float: right;
+            width: 250px;
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .box p span {
+            color: rgb(38, 24, 233);
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <thead></thead>
+        <tbody>
+        <tr class="title">
+            <td>商品</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>小计</td>
+        </tr>
+        <tr>
+            <td><img src="images/shop1.jpg" alt=""></td>
+            <td class="danjia">8</td>
+            <td class="number"><span class="down">-</span><span class="num">0</span><span class="add">+</span></td>
+            <td class="price">0</td>
+        </tr>
+        <tr>
+            <td><img src="images/shop2.jpg" alt=""></td>
+            <td class="danjia">10</td>
+            <td class="number"><span class="down">-</span><span class="num">0</span><span class="add">+</span></td>
+            <td class="price">0</td>
+        </tr>
+        <tr>
+            <td><img src="images/shop3.jpg" alt=""></td>
+            <td class="danjia">12.5</td>
+            <td class="number"><span class="down">-</span><span class="num">0</span><span class="add">+</span></td>
+            <td class="price">0</td>
+        </tr>
+        <tr>
+            <td><img src="images/shop4.jpg" alt=""></td>
+            <td class="danjia">23</td>
+            <td class="number">
+                    <span class="down">-</span>
+                    <span class="num">0</span>
+                    <span class="add">+</span>
+            </td>
+            <td class="price">0</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="box">
+        <p class="totalPrice">合计费用： <span>0</span> ￥</p>
+        <p class="totalNum">已选中商品： <span>0</span> 个</p>
+    </div>
+
+
+    <script>
+        
+
+        //获取元素
+        let Danjia = document.querySelectorAll("table tr .danjia");
+        let Reduce = document.querySelectorAll("table tr .number .down");
+        let Num = document.querySelectorAll("table tr .number .num");
+        let Add = document.querySelectorAll("table tr .number .add");
+        let Price = document.querySelectorAll("table tr .price");
+        let TotalPrice = document.querySelector(".box .totalPrice span");
+        let TotalNum = document.querySelector(".box .totalNum span");
+
+        //total
+        function total(){
+            var n = 0;
+            var p = 0;
+            for(let j = 0;j<Add.length ; j++){
+                n += parseFloat(Num[j].innerHTML);
+                p += parseFloat(Price[j].innerHTML);
+            }
+            return {
+                    totalN : n,
+                    totalP : p
+                }
+        };
+        
+        //封装
+        function html(i){
+            Price[i].innerHTML = Num[i].innerHTML*Danjia[i].innerHTML;
+            TotalNum.innerHTML = total().totalN;
+            TotalPrice.innerHTML = total().totalP;
+        };
+        //点击增加
+        for(let i = 0; i<Add.length; i++){
+            Add[i].onclick = function(){
+                Num[i].innerHTML ++;
+                html(i);
+            }
+        };
+        
+
+        //点击减少
+        for(let i = 0;i<Add.length ; i++){
+            Reduce[i].onclick = function(){
+                Num[i].innerHTML --;
+                if(Num[i].innerHTML<0){
+                    Num[i].innerHTML = 0;
+                };
+                html(i);
+            }
+        }
+
+    </script>
+</body>
+</html>

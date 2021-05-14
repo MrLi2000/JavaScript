@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd{
+            margin:0;
+            padding:0;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul,ol{
+            list-style: none;
+        }
+
+        #check{
+            width: 600px;
+            margin: 50px auto;
+            user-select: none;
+
+        }
+        #check h3{
+            line-height: 35px;
+            border-bottom: 1px dashed #666;
+            margin-bottom: 10px;
+        }
+        #check ul li{
+            float: left;
+            text-indent: 30px;
+            line-height: 35px;
+            font-size: 12px;
+            margin: 0px 10px;
+            background: url("images/ckbg1.jpg") no-repeat 0 6px;
+            cursor: pointer;
+        }
+        #check ul li.checked{
+            background: url("images/ckbg2.jpg") no-repeat 0 6px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "check">
+        
+        <h3>英雄联盟里最喜欢的英雄</h3>
+
+        <ul>
+            <li>维恩</li>
+            <li>图奇</li>
+            <li>奶妈</li>
+            <li>女枪</li>
+            <li>男枪</li>
+            <li>女警</li>
+        </ul>
+    </div>
+
+    <script>
+        var all = document.querySelectorAll("#check li");
+        //遍历循环li添加点击事件
+        for(let i = 0; i < all.length; i ++){
+            all[i].onclick = function(){
+                all[i].classList.toggle("checked");
+            }
+        }
+    </script>
+</body>
+</html>

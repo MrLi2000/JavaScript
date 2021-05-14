@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        span{
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            border-radius: 18px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function randomColor(num) {
+            var html = "";
+            for (let i = 0; i < num; i++) {
+                var r = Math.floor(Math.random()*256);
+                var g = Math.floor(Math.random()*256);
+                var b = Math.floor(Math.random()*256);
+
+                html += `<span style = "background-color: rgb(${r},${g},${b})">
+                            rgb(${r},${g},${b})
+                        </span>`;
+            }
+            document.body.innerHTML = html;
+        };
+        randomColor(50);
+    </script>
+</body>
+</html>

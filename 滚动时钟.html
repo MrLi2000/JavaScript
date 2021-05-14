@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 350px;
+            height: 62px;
+            user-select: none;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        #wrap div{
+            float: left;
+            margin: 0 4px;
+        }
+        #wrap div.time{
+            position: relative;
+            top: 0;
+            width: 40px;
+            height: 124px;
+        }
+        #wrap div.time p{
+            width: 100%;
+            height: 62px;
+            background: linear-gradient(#444444 50%,#393939 50%);
+            text-align: center;
+            line-height: 62px;
+            font-size: 32px;
+            color: #fff;
+            border-radius: 15px;
+        }
+        #wrap div.dotted p{
+            width: 20px;
+            height: 62px;
+            line-height: 62px;
+            font-size: 32px;
+            color: #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <!-- 小时 -->
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="dotted">
+            <p>:</p>
+        </div>
+        <!-- 分钟 -->
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="dotted">
+            <p>:</p>
+        </div>
+        <!-- 秒 -->
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        let Time = document.querySelectorAll("#wrap .time");
+        let p1 = document.querySelectorAll("#wrap .time p:nth-child(1)");
+        let p2 = document.querySelectorAll("#wrap .time p:nth-child(2)");
+
+        //定义辅助变量
+        let lastTime = "";//存储上一次时间
+        //获取时间
+        function time(){
+            let data = new Date();
+            //获取时分秒
+            let hour = data.getHours();
+            let min = data.getMinutes();
+            let s = data.getSeconds();
+            // console.log(hour,min,s);
+
+            //将时间存入对应p里边
+            lastTime = zero(hour) + zero(min) + zero(s); //获得6位数字字符串
+
+            //通过charAt()方法存入
+            p1.forEach(function(ele,index){
+                ele.innerHTML = lastTime.charAt(index);
+            });
+
+            p2.forEach(function(ele,index){
+                ele.innerHTML = lastTime.charAt(index);
+            });
+        };
+        time();
+
+        //时间补零
+        function zero(num) {
+            return (num<10 ? "0" : "")+num;
+        };  
+
+        //动态显示时间滚动
+        function changeTime(){
+            let data = new Date();
+            //获取时分秒
+            let hour = data.getHours();
+            let min = data.getMinutes();
+            let s = data.getSeconds();
+
+            let nowTime = zero(hour)+zero(min)+zero(s); //当前时间
+            //判断当前时间和上一时间是否一致，不一致则滚动
+            for(let i = 0; i< 6 ; i++){
+                if(nowTime.charAt(i) === lastTime.charAt(i)){
+                    continue;
+                }
+                p2[i].innerHTML = nowTime.charAt(i);
+                Time[i].style.transition = "top .3s"; //设置过渡时间
+                Time[i].style.top = "-62px";
+                setTimeout(() => {
+                    p1[i].innerHTML = nowTime.charAt(i);
+                    Time[i].style.transition = "top 0s";
+                    Time[i].style.top = "0px";
+                }, 500);
+            }
+            lastTime = nowTime;
+        };
+        setInterval(changeTime,1000); //间隔一秒
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        #wrap{
+            position: absolute;
+            top:50px;
+            left:50px;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        #wrap p{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        #wrap .e {
+            width: 5px;
+            top:0;
+            right:0;
+            background-color: red;
+            cursor: e-resize;
+        }
+        #wrap .s{
+            height: 5px;
+            bottom:0;
+            right:0;
+            background-color: red;
+            cursor: s-resize;
+        }
+        #wrap .w {
+            width: 5px;
+            bottom:0;
+            left:0;
+            background-color: red;
+            cursor: w-resize;
+        }
+        #wrap .n {
+            height: 5px;
+            top:0;
+            left:0;
+            background-color: red;
+            cursor: n-resize;
+        }
+        #wrap .es,
+        #wrap .ws,
+        #wrap .wn,
+        #wrap .en{
+            width: 5px;
+            height: 5px;
+            background-color: blue;
+        }
+        #wrap .es{
+            bottom: 0;
+            right: 0;
+            cursor: se-resize;
+        }
+        #wrap .ws{
+            bottom: 0;
+            left: 0;
+            cursor: sw-resize;
+        }
+        #wrap .wn{
+            top: 0;
+            left: 0;
+            cursor: nw-resize;
+        }
+        #wrap .en{
+            top: 0;
+            right: 0;
+            cursor: ne-resize;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <p class="e"></p>
+        <p class="w"></p>
+        <p class="n"></p>
+        <p class="s"></p>
+        <p class="es"></p>
+        <p class="ws"></p>
+        <p class="wn"></p>
+        <p class="en"></p>
+    </div>
+
+    <script>
+        let ps = document.querySelectorAll("p");
+        let box = document.getElementById("wrap");
+
+        ps.forEach((item,index)=>{
+            //鼠标按下
+            item.onmousedown = function(e){
+                //鼠标初始位置
+                let mouseStarX = e.pageX;
+                let mouseStarY = e.pageY;
+
+                //wrap盒子本身大小
+                let boxWidth = box.clientWidth;
+                let boxHeight = box.clientHeight;
+
+                //获取盒子当前位置
+                let boxStarLeft = box.offsetLeft;
+                let boxStarTop = box.offsetTop;
+
+                //8个方向变化
+                switch(index){
+                    case 0: //东
+                        document.onmousemove = function(e){
+                            //向东移动后的值
+                            let mouseEndX = e.pageX;
+                            //位移量
+                            let longX = mouseEndX - mouseStarX;
+                            //wrap盒子宽度
+                            let width = boxWidth + longX;
+
+                            //赋值css
+                            box.style.width = width + "px";
+                        };
+                        break;
+                    case 1: //西
+                        document.onmousemove = function(e){
+                            //向西移动后的值
+                            let mouseEndX = e.pageX;
+                            //位移量
+                            let longX = mouseEndX - mouseStarX;
+                            //wrap盒子宽度
+                            let width = boxWidth - longX;
+                            let left = boxStarLeft + longX;
+                            //赋值css
+                            box.style.width = width + "px";
+                            box.style.left = left + "px";
+                        };
+                        break;
+                    case 2: //北
+                        document.onmousemove = function(e){
+                            //向北移动后的值
+                            let mouseEndY = e.pageY;
+                            //位移量
+                            let longY = mouseEndY - mouseStarY;
+                            //wrap盒子高度
+                            let height = boxHeight - longY;
+                            let top = boxStarTop + longY;
+                            //赋值css
+                            box.style.height = height + "px";
+                            box.style.top = top + "px";
+                        };
+                        break;
+                    case 3: //南
+                        document.onmousemove = function(e){
+                            //向南移动后的值
+                            let mouseEndY = e.pageY;
+                            //位移量
+                            let longY = mouseEndY - mouseStarY;
+                            //wrap盒子高度
+                            let height = boxHeight + longY;
+                            //赋值css
+                            box.style.height = height + "px";
+                        };
+                        break;
+                    case 4: //东南
+                        document.onmousemove = function(e){
+                            //向东南移动后的值
+                            let mouseEndX = e.pageX;
+                            let mouseEndY = e.pageY;
+                            //位移量
+                            let longX = mouseEndX - mouseStarX;
+                            let longY = mouseEndY - mouseStarY;
+                            //wrap盒子宽度
+                            let width = boxWidth + longX;
+                            let height = boxHeight + longY;
+                            //赋值css
+                            box.style.width = width + "px";
+                            box.style.height = height + "px";
+                        };
+                        break;
+                    case 5: //西南
+                        document.onmousemove = function(e){
+                            //向西南移动后的值
+                            let mouseEndX = e.pageX;
+                            let mouseEndY = e.pageY;
+                            //位移量
+                            let longX = mouseEndX - mouseStarX;
+                            let longY = mouseEndY - mouseStarY;
+                            //wrap盒子宽高度
+                            let width = boxWidth - longX;
+                            let height = boxHeight + longY;
+                            let left = boxStarLeft + longX;
+                            //赋值css
+                            box.style.width = width + "px";
+                            box.style.height = height + "px";
+                            box.style.left = left + "px";
+                        };
+                        break;
+                    case 6: //西北
+                        document.onmousemove = function(e){
+                            //向西北移动后的值
+                            let mouseEndX = e.pageX;
+                            let mouseEndY = e.pageY;
+                            //位移量
+                            let longX = mouseEndX - mouseStarX;
+                            let longY = mouseEndY - mouseStarY;
+                            //wrap盒子宽度
+                            let width = boxWidth - longX;
+                            let left = boxStarLeft + longX;
+                            let height = boxHeight - longY;
+                            let top = boxStarTop + longY;
+                            //赋值css
+                            box.style.width = width + "px";
+                            box.style.left = left + "px";
+                            box.style.height = height + "px";
+                            box.style.top = top + "px";
+                        };
+                        break;
+                    case 7: //东北
+                        document.onmousemove = function(e){
+                            //向东北移动后的值
+                            let mouseEndX = e.pageX;
+                            let mouseEndY = e.pageY;
+                            //位移量
+                            let longX = mouseEndX - mouseStarX;
+                            let longY = mouseEndY - mouseStarY;
+                            //wrap盒子宽度
+                            let width = boxWidth + longX;
+                            let height = boxHeight - longY;
+                            let top = boxStarTop + longY;
+                            //赋值css
+                            box.style.width = width + "px";
+                            box.style.height = height + "px";
+                            box.style.top = top + "px";
+                        };
+                        break;
+                }
+            }
+        });
+        //鼠标抬起清除onmousemove
+        document.onmouseup = function () {
+                document.onmousemove = null;
+            };
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <title>Document</title>
+    <style>
+        #ball{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="ball"></div>
+
+    <script>
+        let ball = document.getElementById("ball");
+        // console.log(ball);
+
+        let maxWidth,maxHeight,sLeft,sTop; //浏览器最大宽高和小球位移距离
+        let vleft = 1; 
+        let vtop = 2;
+        // 浏览器窗口大小获取
+        window.onresize = (function resize(){
+            maxWidth = document.documentElement.clientWidth - 50;
+            maxHeight = document.documentElement.clientHeight - 50;
+            // console.log(maxWidth,maxHeight);
+            return resize;
+        })();
+        // 小球运动
+        (function remove(){
+            sLeft = ball.offsetLeft + vleft;
+            sTop = ball.offsetTop + vtop;
+
+            //判断小球运动界限
+            if( sLeft >= maxWidth || sLeft <= 0){
+                vleft = -vleft;
+                sLeft = Math.max(0,sLeft);
+                sLeft = Math.min(maxWidth,sLeft);
+            }
+            if( sTop >= maxHeight || sTop <= 0){
+                vtop = -vtop;
+                sTop = Math.max(0,sTop);
+                sTop = Math.min(maxHeight,sTop);
+            }
+            
+            ball.style.left = sLeft + "px";
+            ball.style.top = sTop + "px";
+
+
+            requestAnimationFrame(remove);
+        })();
+        
+    </script>
+</body>
+</html>

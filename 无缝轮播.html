@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        li{list-style: none}
+
+        #banner{
+            overflow: hidden;
+
+            position: relative;
+
+            width: 820px;
+            height: 380px;
+            margin: 50px auto;
+            user-select: none;
+        }
+
+        #banner div.img ul{
+            width: 1000%;
+            margin-left: -100%;
+            transition: margin-left .3s;
+        }
+        #banner div.img ul li{
+            float: left;
+            width: 820px;
+            height: 340px;
+        }
+
+        #banner div.tab{
+            width: 100%;
+            height: 40px;
+        }
+        #banner div.tab ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        #banner div.tab ul li{
+            flex: 1;
+            height: 38px;
+            background-color: rgb(226,225,225);
+            color: #000;
+            line-height: 38px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid transparent;
+        }
+        #banner div.tab ul li.on{
+            color: rgb(205,167,98);
+            border-bottom: 2px solid rgb(205,167,98);
+            background-color: rgb(246,245,245);
+        }
+
+        #banner div.arrow p{
+            position: absolute;
+            top: 145px;
+            width: 30px;
+            height: 50px;
+            background-color: rgba(0,0,0,.5);
+
+            color: #fff;
+            line-height: 50px;
+            font-size: 14px;
+            font-weight: bolder;
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: background-color .2s;
+        }
+        #banner div.arrow p.left{
+            left: 0;
+        }
+        #banner div.arrow p.right{
+            right: 0;
+        }
+        #banner div.arrow p:hover{
+            background-color: rgba(0,0,0,.8);
+        }
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <!--图片区域-->
+        <div class="img">
+            <ul>
+                <li><a href=""><img src="images/5.jpg" alt=""/></a></li>
+                <li><a href=""><img src="images/1.jpg" alt=""/></a></li>
+                <li><a href=""><img src="images/2.jpg" alt=""/></a></li>
+                <li><a href=""><img src="images/3.jpg" alt=""/></a></li>
+                <li><a href=""><img src="images/4.jpg" alt=""/></a></li>
+                <li><a href=""><img src="images/5.jpg" alt=""/></a></li>
+                <li><a href=""><img src="images/1.jpg" alt=""/></a></li>
+            </ul>
+        </div>
+        <!--tab区域-->
+        <div class="tab">
+            <ul>
+                <li class="on">2020季前赛</li>
+                <li>夺冠庆典现已开启</li>
+                <li>真实伤害盛大登场</li>
+                <li>小小英雄</li>
+                <li>云顶之弈攻略中心</li>
+            </ul>
+        </div>
+        <!--左右按钮-->
+        <div class="arrow">
+            <p class="left"> < </p>
+            <p class="right"> > </p>
+        </div>
+    </div>
+
+
+    <script>
+         //获取元素
+        let banner = document.getElementById("banner");
+        let imgUl = document.querySelector("#banner div.img ul");
+        let btn = document.querySelectorAll("#banner div.arrow p");
+        let tabLi = document.querySelectorAll("#banner div.tab ul li");
+        
+        
+        //定义辅助变量
+        let len = tabLi.length;
+        let index = 0;
+        let lastDate = 0;
+        let timer ;
+
+        // 选项卡点击
+        tabLi.forEach(function (item,index) {
+            item.onclick = function () {
+                changeHTML(index);
+            }
+        });
+        //左右按钮点击
+        btn.forEach(function (ele,i) {
+            ele.onclick = function () {
+                let nowDate = new Date();
+                lastDate = nowDate;
+                changeHTML( index + (i?1:-1) )
+            }
+        });
+        //图片位移
+        function changeHTML(i) {
+
+            //设置ul过渡效果
+            imgUl.style.transition = "margin-left .3s";
+            imgUl.style.marginLeft = "-" + (i + 1) + "00%"; //位移距离
+
+            if( i === len || i === -1){
+                let left = i === len?"-100%":"-500%";
+
+                setTimeout(function () {
+                    imgUl.style.transition = "margin-left 0s";
+                    imgUl.style.marginLeft = left;
+                },320);
+            };
+            tabLi[index].classList.remove("on");
+            index = i;
+            index %= len; 
+            if (index < 0){
+                index = len-1;
+            }
+            tabLi[index].classList.add("on");
+        }
+
+        //鼠标移入定时器停止
+        banner.onmouseenter = function () {
+            clearInterval(timer);
+        };
+
+        //鼠标移出定时器继续
+        banner.onmouseleave = (function x() {
+            timer = setInterval(function () {
+                changeHTML(index+1);
+            },1500);
+            return x;
+        });
+    </script>
+</body>
+</html>

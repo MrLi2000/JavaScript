@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .box{
+            display: block;
+            width: 500px;
+            height: 200px;
+            border: 1px dashed red;
+            margin: 50px auto;
+            font-size: 20px;
+        }
+        .list li{
+            list-style: none;
+            width: 500px;
+            border-bottom: 1px solid red;
+            margin: 50px auto;
+        }
+        button{
+            display: block;
+            margin: 0 auto;
+            width: 100px;
+            height: 60px;
+            background-color: #adf;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <textarea class="box">
+
+    </textarea>
+    <button>提交</button>
+    <ul class="list">
+        <!-- <li></li> -->
+    </ul>
+    <script>
+        
+        let box = document.querySelector(".box");
+        let list = document.querySelector(".list");
+        let btn = document.querySelector("button");
+
+        
+        btn.onclick = function() {
+            let val = box.value;
+            box.value = "";
+            list.innerHTML += `<li>${val}</li>`;
+        }
+    </script>
+</body>
+</html>

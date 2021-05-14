@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position:absolute;
+            top: 200px;
+            left: 200px;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+
+
+    <script>
+        let box = document.getElementById("box");
+        let newKey = {};
+        let move = {
+            87:function w() {
+                box.style.top = box.offsetTop - 3 + "px";
+                newKey[87] = requestAnimationFrame(w);
+            },
+            65:function a() {
+                box.style.left = box.offsetLeft - 3 + "px";
+                newKey[65] = requestAnimationFrame(a);
+            },
+            83:function s() {
+                box.style.top = box.offsetTop + 3 + "px";
+                newKey[83] = requestAnimationFrame(s);
+            },
+            68:function d() {
+                box.style.left = box.offsetLeft + 3 + "px";
+                newKey[68] = requestAnimationFrame(d);
+            }
+        };
+            
+        document.onkeydown = function (ev) {
+            let keyCode = ev.keyCode;
+            if (!move[keyCode] || newKey[keyCode]) return;
+            move[keyCode]();
+        };
+
+        document.onkeyup = function (ev) {
+            let keyCode = ev.keyCode;
+            if (!newKey[keyCode])return;
+            cancelAnimationFrame( newKey[keyCode] );
+            newKey[keyCode] = undefined;
+        }
+    </script>
+</body>
+</html>

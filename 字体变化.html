@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+
+        #main {
+            width: 1000px;
+            margin: 50px auto;
+            user-select: none;
+        }
+
+        #main .btn .fonts {
+            width: 60px;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+            color: #fff;
+            background-color:pink;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="btn">
+            <button id="max" class="fonts"> + </button>
+            <button id="min" class="fonts"> - </button>
+        </div>
+        <div id="text">
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+            <p>强大自己是解决一些问题的根本</p>
+        </div>
+    </div>
+
+    <script>
+        var maxBtn = document.getElementById('max');
+        var minBtn = document.getElementById('min');
+
+        var text = document.getElementById('text');
+        //获取元素字体大小
+        var fonts = parseInt(getComputedStyle(text).fontSize);
+
+        maxBtn.onclick = function () {
+            fonts++;
+            if (fonts > 30) {
+                fonts = 30;
+            }
+            text.style.fontSize = fonts + "px";
+        }
+        minBtn.onclick = function () {
+            fonts--;
+            if (fonts <= 12) {
+                fonts = 12;
+            }
+            text.style.fontSize = fonts + "px";
+        }
+    </script>
+</body>
+</html>
