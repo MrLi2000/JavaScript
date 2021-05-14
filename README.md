@@ -1,2 +1,2 @@
-# JavaScript
-JavaScript学习过程中笔记、案例、项目、作业
+＃JavaScript
+笔记，案例，项目
