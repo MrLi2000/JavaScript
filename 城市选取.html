@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;   
+        }
+        ul,ol{
+            list-style: none
+        }
+        a{
+            text-decoration: none
+        }
+        #wrap{
+            width: 900px;
+            height: 500px;
+            margin: 100px auto;
+        }
+        #wrap .left{
+            float: left;
+
+            width: 450px;
+            height: 100%;
+            background-color: pink;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        #wrap .left p{
+            font-size: 16px;
+            color: orangered;
+        }
+        #wrap .left p a{
+            color: #000;
+            margin-left: 3px;
+        }
+        #wrap .left p a:hover{
+            color: red;
+            border: 1px solid red;
+            padding: 5px;
+        }
+        #wrap .right{
+            float: left;
+            width: 450px;
+            height: 100%;
+            background-color: #cfd;
+        }
+        #wrap .left ul.clear li{
+            display: inline-block;
+            margin:10px;
+            padding:8px;
+            color:#fff;
+            border:1px solid #fff;
+        }
+        #wrap .left ul.clear li i{
+            border-left: 1px solid #fff;
+            margin-left: 3px;
+        }
+        #wrap .left ul.clear li:hover,#wrap .right ul.clear2 li:hover{
+            background-color: #faa;
+            cursor: pointer;
+        }
+        #wrap .right ul.clear2 li{
+            display: inline-block;
+            margin:20px 20px ;
+            padding:8px;
+            color:#000;
+            border:1px solid #000;
+        }
+        #wrap .left ul.clear li i:hover{
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="left">
+            <p> 热门目的地：
+                <a href="#">四川</a>
+                <a href="#">成都</a>
+                <a href="#">眉山</a>
+                <a href="#">乐山</a>
+                <a href="#">宜宾</a>
+            </p>
+            <ul class="clear">
+                
+            </ul>
+        </div>
+        <div class="right">
+            <div class="show">
+                <ul class="clear2">
+
+                </ul>
+            </div>
+        </div> 
+    </div>
+
+    <script>
+
+        //获取
+        let city = document.querySelectorAll("#wrap .left a");
+        let leftUl = document.querySelector("#wrap .left ul.clear");
+        let rightUl = document.querySelector("#wrap .right ul.clear2");
+
+
+        //判断是否已经添加该城市
+        city.forEach((item,index)=>{
+            //默认没有添加城市
+            let isAdd = false;
+            city[index].onclick = function(){
+                //isAdd为真进入if
+                if(isAdd){
+                    return;
+                }
+
+                //添加城市
+
+                //创建节点
+                let leftLi = document.createElement("li");
+                let span = document.createElement("span");
+                let i = document.createElement("i");
+
+                span.innerHTML = this.innerHTML; //span内容为当前点击城市
+                i.innerHTML = "X";
+
+                //父级添加子元素
+                leftLi.appendChild(span);
+                leftLi.appendChild(i);
+                leftUl.appendChild(leftLi);
+
+                let rightLi = document.createElement("li");
+                rightLi.innerHTML = this.innerHTML;
+                rightUl.appendChild(rightLi);
+
+                isAdd = true;
+                //点击i清楚对应城市
+                i.onclick = function(){
+                    leftUl.removeChild(leftLi);
+                    rightUl.removeChild(rightLi);
+                    isAdd = false;
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>

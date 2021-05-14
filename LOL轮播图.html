@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        #banner {
+            position: relative;
+            width: 820px;
+            height: 380px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        #banner .img {
+            width: 100%;
+            height: 330px;
+        }
+
+        #banner .img ul {
+            height: 100%;
+            margin: 0;
+            width: 500%;
+            transition: .5s;
+        }
+
+        #banner .img ul li {
+            float: left;
+            width: 820px;
+            height: 100%;
+        }
+
+        #banner .img ul li img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #banner .tab {
+            width: 100%;
+            height: 50px;
+        }
+
+        #banner .tab ul {
+            width: 100%;
+            height: 50px;
+            box-sizing: border-box;
+        }
+
+        #banner .tab ul li {
+            float: left;
+            width: 164px;
+            background-color: #ef2e2e;
+            font-size: 12px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            color: #fff;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        #banner .tab ul li:hover {
+            background-color: black;
+        }
+
+        #banner .tab ul li.active {
+            background-color: black;
+
+        }
+
+        #banner .btn div {
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 40px;
+            margin-top: -20px;
+            background-color: rgba(160, 153, 153, .5);
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        #banner .btn div:hover {
+            background-color: rgba(160, 153, 153, .9);
+        }
+
+        #banner .btn div.btn-left {
+            left: 0;
+        }
+        #banner .btn div.btn-right {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <div class="img">
+            <ul>
+                <li><img src="./images/1.jpg" alt=""></li>
+                <li><img src="./images/2.jpg" alt=""></li>
+                <li><img src="./images/3.jpg" alt=""></li>
+                <li><img src="./images/4.jpg" alt=""></li>
+                <li><img src="./images/5.jpg" alt=""></li>
+            </ul>
+        </div>
+
+        <div class="tab">
+            <ul>
+                <li class="active">太空秘宝</li>
+                <li>七周年战斗之夜</li>
+                <li>奥德赛皮肤璀璨登场</li>
+                <li>七周年限定皮肤翩然降临</li>
+                <li>奥德赛典藏礼包限量版销售</li>
+            </ul>
+        </div>
+
+        <div class="btn">
+            <div class="btn-left">
+                《
+            </div>
+            <div class="btn-right">
+                》
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // 获取左右按钮
+        var l_left = document.querySelector(".btn-left");
+        var l_right = document.querySelector(".btn-right");
+
+        //获取ul图片列表
+        var l_ul = document.querySelector("#banner .img ul");
+        
+        //获取tab > li
+        var l_tab = document.querySelectorAll("#banner .tab ul li");
+
+        //定义变量
+        var l_leng = l_tab.length; //选项卡长度
+        var index = 0;
+
+        //封装函数
+        function change() {
+            //移除全部类名重新添加
+            for (let j = 0; j < l_leng; j++) {
+
+                l_tab[j].classList.remove("active");
+
+            }
+            l_tab[index].classList.add("active");
+            l_ul.style.marginLeft = -index * 820 + "px";
+        }
+
+        // 为按钮添加事件
+        l_left.onclick = function () {
+            // alert("hahah ");
+            index--;
+            if (index < 0) {
+                index = l_leng - 1;
+            }
+            change()
+
+        }
+        l_right.onclick = function () {
+            index++;
+            if (index >= l_leng) {
+                index = 0;
+            }
+            change()
+        }
+
+        //选项卡
+        for (let i = 0; i < l_leng; i++) {
+            //鼠标移上选项卡
+            l_tab[i].onmouseenter = function () {
+                index = i;
+                change()
+            }
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            width: 500px;
+            text-align: center;
+            margin: 50px auto;
+        }
+        table tr{
+            background-color: pink;
+            height: 50px;
+        }
+        table tr.oneTr{
+            font-weight: bold;
+            background-color: #fea;
+        }
+        div#btn{
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        div#btn button{
+            width: 150px;
+            height: 50px;
+            cursor: pointer;
+        }
+        div#btn button:nth-child(1){
+            background-color: #ffe;
+        }
+        div#btn button:nth-child(2){
+            background-color: #faa;
+        }
+        div#btn button:nth-child(3){
+            background-color: #cef;
+        }
+    </style>
+    
+</head>
+<body>
+    <table border="1" cellspacing = "0" id="tab">
+        <thead>
+            <tr class="oneTr">
+                <td>姓名</td>
+                <td>学号</td>
+                <td>成绩</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div id="btn">
+        <button>成绩从低到高排列</button>
+        <button>成绩从高到低排列</button>
+        <button>成绩随机排列</button>
+    </div>
+
+    <script>
+        //模拟数据
+        let data = [
+            {
+                name:"孙悟空",
+                number:1001,
+                grade:100
+            },
+            {
+                name:"猪八戒",
+                number:1002,
+                grade:60
+            },
+            {
+                name:"沙悟净",
+                number:1003,
+                grade:90
+            },
+            {
+                name:"唐僧",
+                number:1004,
+                grade:70
+            },
+            {
+                name:"白马",
+                number:1005,
+                grade:20
+            }
+        ];
+
+        //获取元素
+        let up = document.querySelector("#btn button:nth-child(1)");
+        var down = document.querySelector("#btn button:nth-child(2)");
+        var random = document.querySelector("#btn button:nth-child(3)");
+        let tbody = document.querySelector("table tbody");
+
+        //一次性添加数据
+        function Grade(){
+            let fra = document.createDocumentFragment();
+            //遍历循环
+            data.forEach((item,index)=>{
+
+                //创建节点
+                let tr = document.createElement("tr");
+                let td1 = document.createElement("td");
+                let td2 = document.createElement("td");
+                let td3 = document.createElement("td");
+
+                //添加节点内容
+                td1.innerHTML = data[index].name;
+                td2.innerHTML = data[index].number;
+                td3.innerHTML = data[index].grade;
+
+                //父元素添加子节点
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+
+                fra.appendChild(tr);
+            });
+
+            tbody.appendChild(fra);
+        };
+        Grade();
+
+
+        //实现成绩排序
+        //从低到高
+        up.onclick = ()=>{
+            data.sort(function(a,b){
+                return a.grade - b.grade;
+            });
+            tbody.innerHTML = "";
+            Grade();
+        };
+
+        //从高到低
+        down.onclick = ()=>{
+            data.sort(function(a,b){
+                return b.grade - a.grade;
+            });
+            tbody.innerHTML = "";
+            Grade();
+        };
+
+        //随机
+        random.onclick = ()=>{
+            data.sort(function(){
+                return Math.random()-0.5;
+            });
+            tbody.innerHTML = "";
+            Grade();
+        };
+    </script>
+</body>
+</html>

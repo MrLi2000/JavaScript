@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        #wrap {
+            width: 640px;
+            height: 315px;
+            margin: 50px auto;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+
+        #wrap .top {
+            width: 600px;
+            height: 40px;
+            padding-top: 30px;
+            margin: 0 auto;
+        }
+
+        #wrap .top input {
+            margin: 0 5px;
+            outline: none;
+        }
+
+        #wrap .top input[type=text] {
+            width: 180px;
+            height: 36px;
+            border: 1px solid #bbb;
+            text-indent: 5px;
+
+        }
+
+        #wrap .top input[type=button] {
+            width: 50px;
+            height: 40px;
+        }
+
+        #wrap .bottom {
+            margin-top: 20px;
+        }
+
+        #wrap .bottom p {
+            margin: 5px 0;
+            font-size: 15px;
+            text-indent: 2em;
+            line-height: 25px;
+        }
+
+        #wrap .bottom p b {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="top">
+            <input type="text" placeholder="搜索内容">
+            <input type="button" value="搜索">
+            <input type="text" placeholder="替换内容">
+            <input type="button" value="替换">
+            <input type="button" value="重置">
+        </div>
+        <div class="bottom">
+            <p>乐山大佛，又名凌云大佛，位于四川盆地西南部，距省会成都约150公里，岷江、青衣江、大渡河三江汇流处，与乐山城隔江相望。</p>
+            <p>景区由凌云山、麻浩岩墓、乌尤山、巨形卧佛等组成，游览面积约8平方公里。景区集聚了乐山山水人文景观的精华，属峨眉山国家级风景区范围，是闻名遐迩的风景旅游胜地。</p>
+            <p>“乐山大佛”是后人对这座位于四川省乐山市的大佛的通称。建造于唐代的这座大佛，真实的官方名称却一直是迷。事实上，根据后来诸多专家考察证实，这座被称为“乐山大佛”的石刻雕像的真实官方名称应该是：嘉州凌云寺大弥勒石像。
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        let Input = document.querySelectorAll("#wrap .top input");
+        
+        let content = document.querySelector("#wrap .bottom");
+        let html = content.innerHTML;
+
+        let index = "";
+
+        //事件
+
+
+        //点击搜索
+        Input[1].onclick = function(){
+            let search = Input[0].value;
+            if(search){
+                content.innerHTML = html.split(search).join(`<b>${search}</b>`);
+
+                index = search;
+            }
+        };
+
+
+        //点击替换
+        Input[3].onclick = function(){
+            let search = Input[0].value;
+            let replace = Input[2].value;//替换框内容
+
+            if(search && replace){
+                content.innerHTML = html.split(search).join(`<b>${replace}</b>`);
+
+                index = replace;
+            }
+            //清空输入框内容
+            Input[0].value = "";
+            Input[2].value = "";
+        };
+
+        //点击重置
+        Input[4].onclick= function(){
+            index = "";
+            content.innerHTML = html;
+        };
+
+    </script>
+</body>
+</html>
