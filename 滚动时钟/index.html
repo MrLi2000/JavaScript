@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none ;
+        }
+        #wrap{
+            user-select:none;
+            width: 350px;
+            height: 62px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        #wrap div{
+            float:left;
+            margin: 0 4px;
+        }
+        #wrap div.time{
+            position: relative;
+            top: 0;
+            width: 40px;
+            height: 124px;
+        }
+        #wrap div.time p{
+            width: 100%;
+            height: 62px;
+            background: linear-gradient(#444 50%,#393939 50%);
+            text-align: center;
+            line-height: 62px;
+            font-size: 32px;
+            color: #fff;
+            border-radius: 10px;
+        }
+        #wrap div.dotted p{
+            width: 20px;
+            height: 63px;
+            line-height: 62px;
+            font-size: 32px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <!-- 时 -->
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <!-- :不翻滚 -->
+        <div class="dotted">
+            <p>:</p>
+        </div>
+
+        <!-- 分 -->
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <!-- :不翻滚 -->
+        <div class="dotted">
+            <p>:</p>
+        </div>
+
+        <!-- 秒 -->
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div>
+        <div class="time">
+            <p>0</p>
+            <p>0</p>
+        </div> 
+    </div>
+
+    <script>
+        var time = document.querySelectorAll("#wrap div.time");
+        var p1 = document.querySelectorAll("#wrap div.time p:nth-child(1)");
+        var p2 = document.querySelectorAll("#wrap div.time p:nth-child(2)");
+        var lastTime = ''; //记录上一次时间
+
+        function init(){
+            var date = new Date();  
+            //获取时分秒
+            var hour = date.getHours();
+            var min = date.getMinutes();
+            var sec = date.getSeconds();
+
+            //将时分秒显示在页面(p)中
+            lastTime = zero(hour)+zero(min)+zero(sec);
+            p1.forEach(function(ele,i){
+                ele.innerHTML = lastTime.charAt(i);
+            });
+            p2.forEach(function(ele,i){
+                ele.innerHTML = lastTime.charAt(i);
+            })
+        }
+        init();
+
+        //补零
+        function zero(num){
+            return (num<10? '0':'')+num;
+        }
+
+        //时间变化 (1秒)
+        function changeTime(){
+            var date = new Date();
+            //获取时分秒
+            var hour = date.getHours();
+            var min = date.getMinutes();
+            var sec = date.getSeconds();
+            //显示在页面中p2 
+            var nowTime = zero(hour)+zero(min)+zero(sec);
+
+            // 检测 lastTime和nowTime ,相同不翻滚变化,不相同则滚动变化
+            for(let i = 0 ;i<6;i++){
+
+                if(nowTime.charAt(i) === lastTime.charAt(i)){
+                    continue;
+                }
+                p2[i].innerHTML = nowTime.charAt(i);
+                time[i].style.transition = "top .3s";
+                time[i].style.top = "-62px";
+
+                //动画完成后瞬间恢复底部
+                setTimeout(function (){
+                    p1[i].innerHTML = nowTime.charAt(i);
+                    time[i].style.transition = "top 0s";
+                    time[i].style.top = "0px";
+                },300);
+            }
+
+            lastTime = nowTime;
+        }
+        setInterval(changeTime,1000);
+    </script>
+</body>
+</html>
