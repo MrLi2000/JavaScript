@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>test</title>
+		<style type="text/css">
+			.ptx {
+				border: dimgray 1px solid;
+				color: black;
+				width: 150px;
+			}
+			
+			.gz {
+				font-size: 12px;
+				color: red;
+			}
+			
+			.cen {
+				vertical-align: middle;
+			}
+			
+			a {
+				text-decoration: none;
+				color: blue;
+			}
+			
+			a:visited {
+				color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form>
+			<table align="center" bgcolor="aliceblue" border="0" width="400">
+				<tr height="50">
+					<td colspan="3">
+						<font size="5"><b>注册信息:</b></font>
+					</td>
+				</tr>
+				<tr height="10">
+					<td colspan="3">
+						<hr size="3" color="#696969" />
+					</td>
+				</tr>
+
+				<tr height="50">
+					<td align="right" width="80">用户名：</td>
+					<td align="left" width="160">
+						<input type="text" id="tx" class="ptx" value="" placeholder="请输入用户名" />
+					</td>
+					<td id="tue" class="gz"></td>
+				</tr>
+
+				<tr height="50">
+					<td align="right" width="80">密码：</td>
+					<td align="left" width="160">
+						<input type="password" id="pass" class="ptx" style="" />
+					</td>
+					<td align="left" class="gz">
+						<span id="pue0" style="color: re;float: left;"></span>
+						<table border="0" bordercolor="red" style="float: left;">
+							<tr align="center" style="color: blue;">
+								<td id="pue1"></td>
+								<td id="pue2"></td>
+								<td id="pue3"></td>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr height="50">
+					<td align="right" width="80">手机号码：</td>
+					<td align="left" width="160">
+						<input type="text" class="ptx" id="sjh" style="" />
+					</td>
+					<td id="sue" class="gz"></td>
+				</tr>
+
+				<tr height="50">
+					<td align="right" width="80">邮箱：</td>
+					<td align="left" width="160">
+						<input type="text" id="youx" class="ptx" value="" />
+					</td>
+					<td id="yue" class="gz"></td>
+				</tr>
+				
+				<tr>
+					<td align="right" width="80">性别：</td>
+					<td align="left" width="160">
+						<input type="radio" name="sex" id="sex1" checked="checked" value="" />男
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="sex" id="sex1" value="" />女
+					</td>
+					<td id="xue" class="gz"></td>
+				</tr>
+
+				<tr height="50">
+					<td align="right" width="80">家乡：</td>
+					<td colspan="2">
+						<select id="sfc" name="">
+							<option value="-1">---请选择---</option>
+							<option value="0">北京</option>
+							<option value="1">四川</option>
+							<option value="2">河北</option>
+						</select>
+						<select id="zcs" name=""></select>
+					</td>
+				</tr>
+
+				<tr height="50">
+					<td align="right" width="80">验证码：</td>
+					<td align="left" width="160">
+						<input type="text" style="width: 50px;" id="yzmk" class="ptx" class="cen" />
+						<img src="" id="yimgs" class="cen" />
+
+					</td>
+					<td>
+						<a href="#" onclick="hh()" style="font-size: 12px;">换一张</a>
+						<span class="gz" id="hue"></span>
+					</td>
+				</tr>
+
+				<tr height="50" align="center">
+					<td colspan="3">
+						<input type="button" id="bu" class="aniu" value="提交" onclick="but()" />&nbsp;&nbsp;
+						<input type="reset" id="cz" class="aniu" value="重置" onclick="czb()" maxlength="18" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+
+	<script type="text/javascript">
+		var t = document.getElementById('tx'); //用户名框
+		var p = document.getElementById('pass'); //密码框
+		var k = document.getElementsByClassName('ptx'); //公用
+		var tue = document.getElementById('tue'); //用户名后缀
+		/*
+		 * 密码后缀
+		 */
+		var pue0 = document.getElementById('pue0');
+		var pue = document.getElementById('pue1');
+		var pue1 = document.getElementById('pue2');
+		var pue2 = document.getElementById('pue3');
+
+		var sjh = document.getElementById('sjh'); //手机号框
+		var sue = document.getElementById('sue'); //手机后缀
+		var youx = document.getElementById('youx'); //邮箱框
+		var yue = document.getElementById('yue'); //邮箱后缀
+		var sfc = document.getElementById('sfc'); //下拉选择省份
+		var zcs = document.getElementById('zcs'); //子城市
+		var yzmk = document.getElementById('yzmk'); //验证码框
+		var yimgs = document.getElementById('yimgs'); //验证码图片
+		var hue = document.getElementById('hue'); //验证码后缀
+		var ran; //随机数变量
+		var yzbool = false;//表单提交验证
+
+		var a = new Array();
+		a[0] = '请输入用户名';
+		a[1] = '123';
+		a[2] = 'asd';
+
+		var cs = [
+			['朝阳', '海淀', '通州', '顺义'],
+			['泸州', '成都', '绵阳', '自贡', '德阳', '攀枝花'],
+			['唐山', '邯郸', '保定', '沧州', '廊坊']
+
+		];
+
+		var nyz = ['lxfc', 'flnk', 'mgnu', 'vyil', 'q3nb'];
+
+		/*
+		 * 页面加载
+		 */
+		window.onload = function() {
+			hh();
+		}
+
+		/*
+		 用户名输入检测
+		 * */
+		t.onclick = function() {
+
+			if(t.value == '请输入用户名') {
+				t.value = '';
+			}
+
+			t.style.background = 'aquamarine';
+
+		}
+		var urser = t.onblur =  function () {
+			var zzbds = /^[A-Za-z]{1}/;
+
+			if(t.value == '') {
+				tue.innerHTML = '*请输入用户名';
+				yzbool = false;
+			} else if(!zzbds.test(t.value)) {
+				tue.innerHTML = '*请使用英文字母开头';
+				yzbool = false;
+			}else{
+				yzbool = true;
+			}
+
+			t.style.background = 'white';
+			return yzbool;
+		}
+		t.onkeydown = function() {
+			tue.innerHTML = '';
+		}
+		/*
+		 * 密码框
+		 */
+
+		p.onclick = function() {
+			p.style.background = 'aquamarine';
+		}
+		var pass = p.onblur = function () {
+			var zzbds = /^[a-zA-Z0-9.,*\/\\]{6,18}$/;
+			
+			if(p.value == ''){
+				pue0.innerHTML = '*请输入密码';
+				yzbool = false;
+			}else if(p.value.length > 18 || p.value.length < 6) {
+				pue0.innerHTML = '*密码应为6—18位';
+				yzbool = false;
+			} else if(!zzbds.test(p.value)) {
+				pue0.innerHTML = '*密码应为数字，字母，符号(.,*\/\\)';
+				yzbool = false;
+			} else {
+				mmtps();
+				yzbool = true;
+			}
+			p.style.background = 'white';
+			return yzbool;
+		}
+		var pclear = p.onkeydown = function () {
+			pue0.innerHTML = pue.innerHTML = pue1.innerHTML = pue2.innerHTML = '';
+			pue.width = pue1.width = pue2.width = '';
+			pue.bgColor = pue1.bgColor = pue2.bgColor = '';
+		}
+
+		function maqd() {
+			var bool = 0;
+			var zz01 = /[0-9]/;
+			var zz02 = /[a-zA-Z]/;
+			var zz03 = /[.,*\/\\]/;
+			zz01.test(p.value) ? bool++ : bool += 0;
+			zz02.test(p.value) ? bool++ : bool += 0;
+			zz03.test(p.value) ? bool++ : bool += 0;
+			return bool;
+		}
+
+		function mmtps() {
+			var num = maqd();
+			pue0.height = '20';
+			pue0.width = '90'
+			switch(num) {
+				case 1:
+					pue.bgColor = 'crimson';
+					pue.innerHTML = '弱';
+					pue.width = '30';
+				break;
+				
+				case 2:
+					pue.bgColor = pue1.bgColor = 'gold';
+					pue.width = pue1.width = '30';
+					pue1.innerHTML = '中';
+				break;
+				
+				case 3:
+					pue.bgColor = pue1.bgColor = pue2.bgColor = 'greenyellow';
+					pue.width = pue1.width = pue2.width = '30';
+					pue2.innerHTML = '强';
+				break;
+			}
+
+		}
+
+		/*
+		 * 手机号
+		 */
+		sjh.onclick = function() {
+			sjh.style.background = 'aquamarine';
+		}
+		var phone = sjh.onblur = function () {
+			var zzbds = /^1[0-9]{10}$/;
+			if(sjh.value == ''){
+				sue.innerHTML = '*请输入手机号';
+				yzbool = false;
+			}else if(!zzbds.test(sjh.value)) {
+				sue.innerHTML = '*请输入正确手机号';
+				yzbool = false;
+			}else{
+				yzbool = true;
+			}
+			sjh.style.background = 'white';
+			return yzbool;
+		}
+		sjh.onkeydown = function() {
+			sue.innerHTML = '';
+		}
+
+		/*
+		 * 邮箱框
+		 */
+		youx.onclick = function() {
+			youx.style.background = 'aquamarine';
+		}
+		var email = youx.onblur = function () {
+			var zzbds = /^[0-9a-zA-Z_-]+\@[a-zA-z0-9]+\.com$/;
+			if(youx.value == ''){
+				yue.innerHTML = '*请输入邮箱';
+				yzbool = false;
+			}else if(!zzbds.test(youx.value)) {
+				yue.innerHTML = '*请输入正确邮箱';
+				yzbool = false;
+			}else{
+				yzbool = true;
+			}
+			youx.style.background = 'white';
+			return yzbool;
+		}
+		youx.onkeydown = function() {
+			yue.innerHTML = '';
+		}
+
+		/*
+		 * 下拉列表
+		 */
+		sfc.onchange = function() {
+			zcs.innerHTML = '';
+			for(var i = 0; i < cs[sfc.value].length; i++) {
+				zcs.innerHTML += '<option>' + cs[sfc.value][i] + '</option>';
+			}
+
+		}
+
+		/*
+		 * 验证码
+		 */
+		yzmk.onclick = function() {
+			yzmk.style.background = 'aquamarine';
+		}
+		yzmk.onblur = function () {
+			yzmk.style.background = 'white';
+		}
+		yzmk.onkeydown = function() {
+			hue.innerHTML = '';
+		}
+
+		function hh() {
+			ran = parseInt(Math.random() * 5 + 1);
+			yimgs.src = 'imgs/timg' + ran + '.jpg';
+		}
+
+		/*
+		 * 提交时检测
+		 */
+		function but() {
+			for(var i = 0; i < a.length; i++) {
+				if(t.value == a[i]) {
+					tue.innerHTML = "*此用户名已被使用";
+					tue.style.color = 'red';
+					yzbool = false;
+				}else {
+					yzbool = true;	
+				}
+			}
+			var b = false;
+			if(yzmk.value.toLocaleLowerCase() != nyz[ran - 1]) {
+				hue.innerHTML = '*验证码错误';
+				b = false;
+			}else {
+				b = true;	
+				}
+			
+			if(urser() && pass() && phone() && email() && yzbool && b){
+				alert("提交成功！");
+			}else{
+				alert("提交失败");
+			}
+		}
+
+		/*
+		 * 重置按钮
+		 */
+		function czb() {
+
+			hh();
+			hue.innerHTML = '';
+
+			tue.innerHTML = '';
+
+			pclear();
+
+			sue.innerHTML = '';
+
+			yue.innerHTML = '';
+
+			sfc.value = '-1';
+			zcs.innerHTML = '';
+			
+		}
+	</script>
+
+</html>
