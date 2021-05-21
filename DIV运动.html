@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>图片运动</title>
+        <style type="text/css">
+            #diamond {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                position: absolute;
+                left: 0px;
+                top: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="btn">运动吧！小方块</button>
+        <div id="diamond"></div>
+    </body>
+    <script type="text/javascript">
+        var btn = document.getElementById('btn');
+        var dia = document.getElementById('diamond');
+        var count = 0;
+        btn.onclick = function() {
+            time = setInterval(function() { //注意这里要带单位px
+                count += 10;
+                if (count % 800 == 0) {
+                    count = 0;
+                    clearInterval(time); //运动到800px关闭定时器
+                }
+                dia.style.left = count + 'px';
+            }, 150)
+        };
+    </script>
+</html

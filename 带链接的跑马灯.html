@@ -1,0 +1,48 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>带连接的跑马灯</title>
+        <!--css样式设置-->
+        <style>
+        	#paomadeng{
+				width:75%;
+				height:25;
+				border:0px;
+				margin:0px auto;
+				background-color:#CC3333;
+			}
+			marquee a{
+				text-decoration:none;
+				color:black;
+			}
+       </style>
+	</head>
+	<body>
+		<div id="paomadeng">
+        	<marquee scrollamount="15">       
+            	<a href="http://www.baidu.com">点击这里进入百度</a>
+            	<a href="https://www.sina.com">点击这里进去新浪</a>
+           </marquee>
+       </div>
+	</body>
+<!--
+	1、语法：<marquee>...</marquee>； 说明：在标记之间添加要进行滚动的内容。
+
+2、重要属性：
+
+    （1）.滚动方向direction（包括4个值：up、 down、 left和 right）
+　    　语法：<marquee direction="滚动方向">...</marquee>
+    （2）.滚动方式behavior（scroll:循环滚动，默认效果； slide:只滚动一次就停止； alternate:来回交替进行滚动）
+　　    语法：<marquee behavior="滚动方式">...</marquee>
+    (3).滚动速度scrollamount（滚动速度是设置每次滚动时移动的长度，以像素为单位）
+　    　语法：<marquee scrollamount="5">...</marquee>
+    (4).滚动延迟scrolldelay（设置滚动的时间间隔，单位是毫秒）
+　    　语法：<marquee scrolldelay="100">...</marquee>
+    (5).滚动循环loop（默认值是-1，滚动会不断的循环下去）
+　　    语法：<marquee loop="2">...</marquee>
+    (6).滚动范围width、height
+    (7).滚动背景颜色bgcolor
+    (8).空白空间hspace、vspace
+-->
+</html>

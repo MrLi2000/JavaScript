@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8"><title> 按需生成表格 </title>
+ </head>
+ <body>
+    <br/>请填写生成表格的行：<br/><br/>
+    行：<input type="text" id="h"/>
+    列：<input type="text" id="l"/>
+    <br/><br/>
+    <input type="button" value="生成" onclick="add1();"/>
+    <div id="div1">
+    </div>
+ </body>
+ <script type="text/javascript">
+    function add1(){
+        var h1 = document.getElementById("h").value;//获取id为 h 的value 值
+        var l1 = document.getElementById("l").value;//获取id为l 的value 值
+        var tab= "<table border='1'>";//创建表格
+        for(var i=1;i<=h1;i++){//循环生成行
+            tab += "<tr>";
+                for(var j=1;j<=l1;j++){//循环生成列
+                tab += "<td>null</td>"
+            }
+            tab += "</tr>";
+        }
+        tab += "</table>";
+        var div = document.getElementById("div1");//获取div的id
+        div.innerHTML = tab;//添加到div中
+    }
+  </script>
+</html>
