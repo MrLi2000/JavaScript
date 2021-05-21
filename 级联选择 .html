@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> 级联选择 </title>
+    </head>
+    <body>
+        <select id="provinceid" onchange="change1(this.value);">
+            <option value="0">--请选择--</option>
+            <option value="四川省">四川省</option>
+            <option value="福建省">福建省</option>
+            <option value="安徽省">安徽省</option>
+            <option value="浙江省">浙江省</option>
+            <option value="湖南省">湖南省</option>
+        </select>
+        
+        <select id="cityid">
+        </select>
+    </body>
+    <script type="text/javascript">
+        var country1 = new Array(5); //创建二维数组, 数组的长度为5
+
+        /*在每个数组元素上添加一个一维数组，来保存省下的城市*/
+        country1[0] = ["四川省", "成都市", "绵阳市", "内江市", "眉山市", "南充市"];
+        country1[1] = ["福建省", "厦门市", "泉州市", "莆田市", "福州市", "南平市"];
+        country1[2] = ["安徽省", "合肥市", "阜阳市", "淮南市", "宣城市", "安庆市"];
+        country1[3] = ["浙江省", "杭州市", "绍兴市", "金华市", "丽水市", "温州市"];
+        country1[4] = ["湖南省", "长沙市", "衡阳市", "永州市", "湘潭市", "岳阳市"];
+
+        function change1(val) {
+            var ct = document.getElementById("cityid"); //得到cityid对象
+            var opt1 = ct.getElementsByTagName("option"); //获取ct下的option对象
+            
+            for (var m = 0; m < opt1.length; m++) { //遍历数组
+                var op11 = opt1[m]; //得到每一个opt1对象
+                ct.remove(op11); //移除每一个对象，通过父节点删除
+                m--; //置为空
+            }
+            
+            /*判断是否与数组的第一个值相等*/
+            for (var i = 0; i < country1.length; i++) { //遍历二维数组
+                var coun1 = country1[i]; //得到每一个数组对象,得到的是一个一维数组
+                var firstvalue = coun1[0]; //获取数组的第一个值，判断是否和select下的省相等
+                if (firstvalue == val) { //判断是否相等，若相等，把传入的值添加到cityid下
+                    for (var j = 1; j < coun1.length; j++) { //遍历coun1，得到第一个值后边的元素
+                        var coun2 = coun1[j]; //得到城市名称
+                        var op1 = document.createElement("option"); //创建option对象
+                        var text1 = document.createTextNode(coun2); //创建文本节点
+                        op1.appendChild(text1); //把text1添加到op1中
+                        ct.appendChild(op1); //添加值到cityid中
+                    }
+                }
+            }
+        }
+    </script>
+</html>

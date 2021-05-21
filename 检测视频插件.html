@@ -1,0 +1,125 @@
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>检测视频插件</title>
+
+		<style ype="text/css">
+
+			body{
+
+				font-family:"宋体";
+
+				font-size:9px;
+
+			}
+
+			A{
+
+				text-decoration:none;
+
+				color:#ffffff;
+
+				font-famnily:"宋体";
+
+				font-size:9px;
+
+			}
+
+			A:hover{
+
+				text- decoration:underline;
+
+				color:red;
+
+				font-family:"宋体";
+
+				font-size:9px
+
+			}
+
+			a:visited{
+
+				font-family:"宋体";
+
+				color:orange;
+
+				font-size:9px;
+
+			}
+
+			A:active{
+
+				font-family:"宋体";
+
+				font-style:normal; 
+
+				font-weight:bold;
+
+				color:cyan;
+
+				text-decoraion:underlinc;
+
+				font-size:9px
+
+			}
+
+			br{
+
+				font-family:"朱体";
+
+				font-size:9px;
+
+			}
+
+        </style>
+
+   	 </head>
+
+    <body bgcolor="#000000" text="#FFFFFF">
+
+        <p align="center">检测浏览器是否已经安装了Quicktime和Shockwave视频插件</p>
+
+ 		<hr size ="1" color="#FF0000">
+
+        <p align="left">检测结果:</p>
+
+        <p align="left">
+
+			<script>
+
+				var myPlugin = navigator.plugins["Shockwave"];
+
+				if (myPlugin)
+
+					document.witeln("你已经安装了Shockwave!");
+
+				else
+
+					document.writeln("你尚未安装Shockwave!");
+
+            </script><br>
+
+			<script>
+
+				var myPlugin = navigator.plugins["Quicktime"];
+
+				if(myPlugin)
+
+					document.writeln("你已经安装了Quicktime!");
+
+				else
+
+					document.writeln("你尚未安装Quicktime!");
+
+
+
+			</script>
+
+		</p>
+
+	</body>
+
+</html>
